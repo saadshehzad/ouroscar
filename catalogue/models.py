@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 
 class Product(models.Model):
     name = models.CharField(max_length=40)
@@ -29,8 +27,10 @@ class ProductOptions(models.Model):
 
 
 class ProductClass(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.ForeignKey(max_length=30)
     weight = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
+
+
