@@ -7,7 +7,7 @@ from .models import Category, Product, ProductClass, ProductOptions
 def product_list(request):
     all_products = Product.objects.all()
     context = {"products": all_products}
-    return render(request, "list.html", context)
+    return render(request, "product_list.html", context)
 
 
 def create_product(request):
