@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class TimeStampMixin(models.Model):
@@ -8,26 +9,19 @@ class TimeStampMixin(models.Model):
     class Meta:
         abstract = True
 
-
-class ProductClass(TimeStampMixin):
-    name = models.CharField(max_length=50)
-
+class Partners(TimeStampMixin):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    
+    class Meta:
+        verbose_name = verbose_name_plural = "Partners"
+        
     def __str__(self):
-        return self.name
-
-
-class Category(TimeStampMixin):
-    product_class = models.ManyToManyField(ProductClass)
-    name = models.CharField(max_length=30)
-    image = models.ImageField(null=True)
-
+        return f"{self.user.first_name}"
+    
+class PartnerAddress(TimeStampMixin):
+    partner = models.OneToOneField(Partners, on_delete=models.CASCADE)
+    city = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    
     def __str__(self):
-        return self.name
-
-class Product(TimeStampMixin):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
-    name = models.CharField(max_length=40)
-    cost = models.CharField(max_length=70)
-
-    def __str__(self):
-        return self.name
+        return f"{self.partner.user.first_name, self.city, self.country}"
