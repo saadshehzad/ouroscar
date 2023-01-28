@@ -27,7 +27,7 @@ class ProductOptions(models.Model):
 
 
 class ProductClass(models.Model):
-    name = models.ForeignKey(max_length=30)
+    name = models.ForeignKey(ProductOptions, max_length=30, on_delete=models.CASCADE)
     weight = models.CharField(max_length=50)
 
     def __str__(self):
