@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 
 from .forms import *
-from .models import Category, Product, ProductClass, ProductOptions
+from .models import Category, Product, ProductClass
 
 
 def product_list(request):
@@ -85,46 +85,3 @@ def delete_category_by_id(request, id):
         return redirect("/")
     context = {"obj": obj}
     return render(request, "delete_category.html", context)
-
-
-# ProductOptions CRUD
-
-
-def productoptions_list(request):
-    all_products = ProductOptions.objects.all()
-    context = {"productoptions": all_products}
-    return render(request, "productoptions_list.html", context)
-
-
-def create_productoptions(request):
-    form = ProductOptionsForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect("productoptions_list")
-    context = {"form": form}
-    return render(request, "create_productoptions.html", context)
-
-
-def get_productoptions_by_id(request, id):
-    obj = ProductOptions.objects.get(id=id)
-    context = {"obj": obj}
-    return render(request, "get_productoptions.html", context)
-
-
-def update_productoptions_by_id(request, id):
-    productoption = ProductOptions.objects.get(id=id)
-    form = ProductOptionsForm(request.POST or None, instance=productoption)
-    if form.is_valid():
-        form.save()
-        return redirect("/")
-    context = {"form": form}
-    return render(request, "update_productoption.html", context)
-
-
-def delete_productoption_by_id(request, id):
-    obj = ProductOptions.objects.get(id=id)
-    if request.method == "POST":
-        obj.delete()
-        return redirect("/")
-    context = {"obj": obj}
-    return render(request, "delete_productoption.html", context)
