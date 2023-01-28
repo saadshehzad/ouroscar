@@ -1,7 +1,8 @@
-from django.forms import forms
+from django import forms
 from .models import *
 
 
-class PartneradressForm(forms.ModelForm):
-    model = PartnerAddress
-    fields = "__all__"
+class PartneraddressForm(forms.ModelForm):
+    class Meta:
+        model = PartnerAddress
+        fields = "__all__"
