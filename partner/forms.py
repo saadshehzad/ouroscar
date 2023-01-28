@@ -2,7 +2,6 @@ from django.forms import forms
 from .models import *
 
 
-class PartneradressForm(forms.Form):
+class PartneradressForm(forms.ModelForm):
     model = PartnerAddress
-    
-    fields = "all"
+    fields = "__all__"
