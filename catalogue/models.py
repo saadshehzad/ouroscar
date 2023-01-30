@@ -19,7 +19,7 @@ class ProductClass(TimeStampMixin):
 class Category(TimeStampMixin):
     product_class = models.ManyToManyField(ProductClass)
     name = models.CharField(max_length=30)
-    image = models.ImageField(null=True)
+    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name
