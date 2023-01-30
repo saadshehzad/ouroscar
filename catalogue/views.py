@@ -85,3 +85,45 @@ def delete_category_by_id(request, id):
         return redirect("/")
     context = {"obj": obj}
     return render(request, "delete_category.html", context)
+
+# ProductClass CRUD
+def productclass_list(request):
+    all_productclass = ProductClass.objects.all()
+    context = {"products": all_productclass}
+    return render(request, "productclass_list.html", context)
+
+
+def create_productclass(request):
+    form = ProductForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("list")
+    context = {"form": form}
+    return render(request, "create_productclass.html", context) 
+
+
+def get_productclass(request, id):
+    obj = ProductClass.objects.get(id=id)
+    context = {"obj": obj}
+    return render(request, "get_productclass.html", context)
+
+
+def update_productclass(request, id):
+    productclass = ProductClass.objects.get(id=id)
+    form = ProductClassForm(request.POST or None, instance=productclass)
+    if form.is_valid():
+        form.save()
+        return redirect("/")
+    context = {"form": form}
+    return render(request, "update_productclass.html", context)
+
+
+def delete_productclass(request, id):
+    obj = ProductClass.objects.get(id=id)
+    if request.method == "POST":
+        obj.delete()
+        return redirect("/")
+    context = {"obj": obj}
+    return render(request, "delete_productclass.html", context )
+
+
