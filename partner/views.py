@@ -6,7 +6,6 @@ from .models import *
 
 def partneraddress_list(request):
     obj = PartnerAddress.objects.all()
-    print(obj)
     context = {"partners": obj}
     return render(request, "partner/partner_list.html", context)
 
