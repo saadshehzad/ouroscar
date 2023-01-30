@@ -86,6 +86,7 @@ def delete_category_by_id(request, id):
     context = {"obj": obj}
     return render(request, "catalogue/delete_category.html", context)
 
+
 # ProductClass CRUD
 def productclass_list(request):
     all_productclass = ProductClass.objects.all()
@@ -99,7 +100,7 @@ def create_productclass(request):
         form.save()
         return redirect("list")
     context = {"form": form}
-    return render(request, "catalogue/create_productclass.html", context) 
+    return render(request, "catalogue/create_productclass.html", context)
 
 
 def get_productclass(request, id):
@@ -124,6 +125,4 @@ def delete_productclass(request, id):
         obj.delete()
         return redirect("/")
     context = {"obj": obj}
-    return render(request, "catalogue/delete_productclass.html", context )
-
-
+    return render(request, "catalogue/delete_productclass.html", context)

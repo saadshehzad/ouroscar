@@ -14,7 +14,8 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = "__all__"
 
+
 class ProductClassForm(forms.ModelForm):
     class Meta:
         model = ProductClass
-        fields = "__all__"        
+        fields = "__all__"

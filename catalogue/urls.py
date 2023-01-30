@@ -23,4 +23,3 @@ urlpatterns = [
     path("productclass/update/<int:id>", update_productclass),
     path("productclass/delete/<int:id>", delete_productclass),
 ]
-

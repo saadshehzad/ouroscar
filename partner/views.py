@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect, HttpResponse
-from .models import *
+from django.shortcuts import HttpResponse, redirect, render
+
 from .forms import *
+from .models import *
 
 
 def partneraddress_list(request):
@@ -15,8 +16,9 @@ def creat_partneraddress(request):
     if form.is_valid():
         form.save()
         return HttpResponse("your form has been saved")
-    context = {"form":form}
+    context = {"form": form}
     return render(request, "partner/partner_create.html", context)
+
 
 def partneraddress_detail(request, id):
     try:
