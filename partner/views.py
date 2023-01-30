@@ -7,7 +7,7 @@ def partneraddress_list(request):
     obj = PartnerAddress.objects.all()
     print(obj)
     context = {"partners": obj}
-    return render(request, "partner_list.html", context)
+    return render(request, "partner/partner_list.html", context)
 
 
 def creat_partneraddress(request):
@@ -16,7 +16,7 @@ def creat_partneraddress(request):
         form.save()
         return HttpResponse("your form has been saved")
     context = {"form":form}
-    return render(request, "partner_create.html", context)
+    return render(request, "partner/partner_create.html", context)
 
 def partneraddress_detail(request, id):
     try:
@@ -24,7 +24,7 @@ def partneraddress_detail(request, id):
     except:
         return HttpResponse("Address Not Available")
     context = {"obj": obj}
-    return render(request, "partner_detail.html", context)
+    return render(request, "partner/partner_detail.html", context)
 
 
 def partneraddress_update(request, id):
@@ -37,7 +37,7 @@ def partneraddress_update(request, id):
     except:
         return HttpResponse("Address is Not Available")
     context = {"form": form}
-    return render(request, "partner_update.html", context)
+    return render(request, "partner/partner_update.html", context)
 
 
 def delete_partneraddress(request, id):
@@ -49,4 +49,4 @@ def delete_partneraddress(request, id):
     except:
         return HttpResponse("Address is Not Available")
     context = {"obj": obj}
-    return render(request, "delete_partner.html", context)
+    return render(request, "partner/delete_partner.html", context)
