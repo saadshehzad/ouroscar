@@ -1,4 +1,6 @@
-<div class="main">
+{% extends 'base.html' %}
+
+{% block content %}
 	<!-- Create a Form -->
 	<form method="POST">
 		<!-- Security token by Django -->
@@ -7,4 +9,4 @@
 		<input type="submit" value="Yes" />
 		<a href="/">Cancel </a>
 	</form>
-</div>
+{% endblock content %}

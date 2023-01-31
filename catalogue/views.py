@@ -7,7 +7,7 @@ from .models import Category, Product, ProductClass
 def product_list(request):
     all_products = Product.objects.all()
     context = {"products": all_products}
-    return render(request, "catalogue/product_list.html", context)
+    return render(request, "catalogue/products/product_list.html", context)
 
 
 def create_product(request):
@@ -16,16 +16,16 @@ def create_product(request):
         product_form.save()
         return redirect("product_list")
     context = {"form": product_form}
-    return render(request, "catalogue/create_product.html", context)
+    return render(request, "catalogue/products/create_product.html", context)
 
 
-def detail_product(request, id):
+def get_product(request, id):
     try:
         product = Product.objects.get(id=id)
     except:
         return HttpResponse("Product does not exists.")
     context = {"obj": product}
-    return render(request, "catalogue/product_detail.html", context)
+    return render(request, "catalogue/products/get_product.html", context)
 
 
 def update_product(request, id):
@@ -39,7 +39,7 @@ def update_product(request, id):
         product_form.save()
         return redirect("/")
     context = {"form": product_form}
-    return render(request, "catalogue/product_update.html", context)
+    return render(request, "catalogue/products/update_product.html", context)
 
 
 def delete_product(request, id):
@@ -51,7 +51,7 @@ def delete_product(request, id):
         product.delete()
         return redirect("/")
     context = {"obj": product}
-    return render(request, "catalogue/product_delete.html", context)
+    return render(request, "catalogue/products/delete_product.html", context)
 
 
 # Categories CRUD
@@ -60,7 +60,7 @@ def delete_product(request, id):
 def categoris_list(request):
     categories = Category.objects.all()
     context = {"categories": categories}
-    return render(request, "catalogue/list_category.html", context)
+    return render(request, "catalogue/categories/list_category.html", context)
 
 
 def get_category_by_id(request, id):
@@ -69,16 +69,16 @@ def get_category_by_id(request, id):
     except:
         return HttpResponse("Category does not exists.")
     context = {"obj": category}
-    return render(request, "catalogue/get_category.html", context)
+    return render(request, "catalogue/categories/get_category.html", context)
 
 
-def create_cateory(request):
+def create_category(request):
     category_form = CategoryForm(request.POST or None)
     if category_form.is_valid():
         category_form.save()
         return redirect("category_list")
     context = {"form": category_form}
-    return render(request, "catalogue/create_category.html", context)
+    return render(request, "catalogue/categories/create_category.html", context)
 
 
 def update_category(request, id):
@@ -91,7 +91,7 @@ def update_category(request, id):
         category_form.save()
         return redirect("/")
     context = {"form": category_form}
-    return render(request, "catalogue/update_category.html", context)
+    return render(request, "catalogue/categories/update_category.html", context)
 
 
 def delete_category_by_id(request, id):
@@ -103,14 +103,14 @@ def delete_category_by_id(request, id):
         category.delete()
         return redirect("/")
     context = {"obj": category}
-    return render(request, "catalogue/delete_category.html", context)
+    return render(request, "catalogue/categories/delete_category.html", context)
 
 
 # ProductClass CRUD
 def productclass_list(request):
     product_class = ProductClass.objects.all()
     context = {"product_class": product_class}
-    return render(request, "catalogue/productclass_list.html", context)
+    return render(request, "catalogue/productclass/productclass_list.html", context)
 
 
 def create_productclass(request):
@@ -119,7 +119,7 @@ def create_productclass(request):
         form.save()
         return redirect("list")
     context = {"form": form}
-    return render(request, "catalogue/create_productclass.html", context)
+    return render(request, "catalogue/productclass/create_productclass.html", context)
 
 
 def get_productclass(request, id):
@@ -128,7 +128,7 @@ def get_productclass(request, id):
     except:
         return HttpResponse("Product Class Does not exists")
     context = {"obj": product_class}
-    return render(request, "catalogue/get_productclass.html", context)
+    return render(request, "catalogue/productclass/get_productclass.html", context)
 
 
 def update_productclass(request, id):
@@ -138,7 +138,7 @@ def update_productclass(request, id):
         form.save()
         return redirect("productclass_list")
     context = {"form": form}
-    return render(request, "catalogue/update_productclass.html", context)
+    return render(request, "catalogue/productclass/update_productclass.html", context)
 
 
 def delete_productclass(request, id):
@@ -149,5 +149,5 @@ def delete_productclass(request, id):
     if request.method == "POST":
         product_class.delete()
         return redirect("/")
-    context = {"obj": obj}
-    return render(request, "catalogue/delete_productclass.html", context)
+    context = {"obj": product_class}
+    return render(request, "catalogue/productclass/delete_productclass.html", context)
