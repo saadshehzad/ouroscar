@@ -21,7 +21,7 @@ INSTALLED_APPS = [
     "partner",
     "dashboard",
     # Other Apps
-    "django_extensions"
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
