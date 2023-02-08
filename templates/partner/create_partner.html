@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="POST"> {% csrf_token %}
+    
+    <input type="text" id="first_name" name="first_name" value="">
+    <input type="text" id="last_name" name="last_name" value="">
+    <input type="text" value="Username", name="username">
+    <input type="text" value="Email", name="email">
+    <input type="text" value="Phone", name="phone">
+    <input type="password" value="Password", name="password">
+    <input type="submit" value="Submit">
+  </form>  
+
+{% endblock content %}
+
+smj i apko? call ? ok
