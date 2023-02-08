@@ -12,6 +12,7 @@ class TimeStampMixin(models.Model):
 
 class Partners(TimeStampMixin):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    phone = models.CharField(max_length=40, null=True)
 
     class Meta:
         verbose_name = verbose_name_plural = "Partners"
