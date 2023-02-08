@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    {% for a in partners %}
+
+        {{a.partner.user.first_name}} <br/>
+        {% comment %} {{a.city}} <br/> {% endcomment %}
+        {{a.country}} <br/><br/>
+
+
+    {% endfor %}
+
+
+{% endblock content %}
