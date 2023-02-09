@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form method="POST"> {% csrf_token %}
+{% comment %} <form method="POST"> {% csrf_token %}
     
     <input type="text" id="first_name" name="first_name" value="">
     <input type="text" id="last_name" name="last_name" value="">
@@ -11,8 +11,42 @@
     <input type="text" value="Phone", name="phone">
     <input type="password" value="Password", name="password">
     <input type="submit" value="Submit">
-  </form>  
+  </form>   {% endcomment %}
 
+
+ <form method="POST">{% csrf_token %}
+  <div class="form-row">
+    <div class="col">
+      <label for="first_name"></label>
+      <input type="text" class="form-control" placeholder="First name">
+    </div>
+    <div class="col">
+      <label for="last_name"></label>
+      <input type="text" class="form-control" placeholder="Last name">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col">
+      <label for="username"></label>
+      <input type="text" class="form-control" placeholder="username">
+    </div>
+    <div class="col">
+      <label for="phone"></label>
+      <input type="text" class="form-control" placeholder="phone">
+    </div>
+  </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="email"></label>
+        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="password"></label>
+        <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+      </div>
+    </div>
+    <input type="submit" value="Submit">
+    {% comment %} <button type="submit" class="btn btn-primary">create</button> {% endcomment %}
+</form>
 {% endblock content %}
-
-smj i apko? call ? ok
