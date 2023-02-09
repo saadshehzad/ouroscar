@@ -66,6 +66,10 @@ def create_partner(request):
             email = request.POST.get("email")
             phone = request.POST.get("phone")
             password = request.POST.get("password")
+            all_users = User.objects.all()
+            for user in all_users:
+                if email == user.email:
+                    return HttpResponse("User with this email already exists.")
             user = User.objects.create(first_name=first_name,
                 last_name=last_name, username=username, email=email,
                 password=password)
