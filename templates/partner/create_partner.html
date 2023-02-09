@@ -2,51 +2,23 @@
 
 {% block content %}
 
-{% comment %} <form method="POST"> {% csrf_token %}
-    
-    <input type="text" id="first_name" name="first_name" value="">
-    <input type="text" id="last_name" name="last_name" value="">
-    <input type="text" value="Username", name="username">
-    <input type="text" value="Email", name="email">
-    <input type="text" value="Phone", name="phone">
-    <input type="password" value="Password", name="password">
-    <input type="submit" value="Submit">
-  </form>   {% endcomment %}
-
-
- <form method="POST">{% csrf_token %}
-  <div class="form-row">
-    <div class="col">
-      <label for="first_name"></label>
-      <input type="text" class="form-control" placeholder="First name">
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h1 style="margin-top:150px; color:darkred">Register yourself as a<br> partner</h1>
     </div>
-    <div class="col">
-      <label for="last_name"></label>
-      <input type="text" class="form-control" placeholder="Last name">
+    <div class="col-sm" style="margin-top:50px">
+      <form method="POST"> {%  csrf_token %}
+        <input type="text" class="form-control" name="first_name" placeholder="First Name"><br>
+        <input type="text" class="form-control" name="last_name" placeholder="Last Name"><br>
+        <input type="text" class="form-control" name="username" placeholder="Username"><br>
+        <input type="text" class="form-control" name="phone" placeholder="Phone"><br>
+        <input type="email" class="form-control" name="email" placeholder="Email"><br>
+        <input type="password" class="form-control" name="password" placeholder="Password"><br>
+        <button type="submit" class="btn btn-danger">Regiter</button>
+      </form>
     </div>
   </div>
-  <div class="form-row">
-    <div class="col">
-      <label for="username"></label>
-      <input type="text" class="form-control" placeholder="username">
-    </div>
-    <div class="col">
-      <label for="phone"></label>
-      <input type="text" class="form-control" placeholder="phone">
-    </div>
-  </div>
+</div>
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="email"></label>
-        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="password"></label>
-        <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-      </div>
-    </div>
-    <input type="submit" value="Submit">
-    {% comment %} <button type="submit" class="btn btn-primary">create</button> {% endcomment %}
-</form>
 {% endblock content %}

@@ -78,3 +78,24 @@ def create_partner(request):
         except:
             return HttpResponse("Cannot Create partner")
     return render(request, "partner/create_partner.html")
+
+
+
+
+# ab dono mill kr ek kam kro
+
+
+# jab ek filed miss hoti hy to wo just message show krwata k cannot create partner...
+# ab ye kpoi valid message nhi hy....
+# humy mention krna hoga k this field is missing
+# for exmpale
+
+
+
+# if you need any help search this on internet
+# for exmplae
+# django form validation
+# how to validate django forms fields
+
+
+ok?okji

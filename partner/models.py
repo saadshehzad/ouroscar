@@ -28,3 +28,6 @@ class PartnerAddress(TimeStampMixin):
 
     def __str__(self):
         return f"{self.partner.user.first_name, self.city, self.country}"
+
+
+
