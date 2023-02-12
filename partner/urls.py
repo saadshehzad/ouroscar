@@ -11,5 +11,4 @@ urlpatterns = [
     
     # partner
     path("create/", create_partner),
-    path("profile/", partner_profile, name="profile"),
 ]

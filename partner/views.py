@@ -79,13 +79,3 @@ def create_partner(request):
             return HttpResponse("Cannot Create partner")
     return render(request, "partner/create_partner.html")
 
-
-def partner_profile(request):
-    if request.user:
-        partner = Partners.objects.get(user=request.user)
-        context = {
-            "name": partner.user.first_name,
-            "email": partner.user.email
-        }
-        return render(request, "partner/partner_profile.html", context)
-    return HttpResponse("You must login first.")
