@@ -10,5 +10,5 @@ urlpatterns = [
     path("address/delete/<int:id>", delete_partneraddress),
     
     # partner
-    path("create/", create_partner)    
+    path("create/", create_partner),
 ]

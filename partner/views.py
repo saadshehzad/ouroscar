@@ -1,5 +1,5 @@
 from django.shortcuts import HttpResponse, redirect, render
-
+from django.contrib.auth.hashers import make_password
 from .forms import *
 from .models import *
 
@@ -65,7 +65,7 @@ def create_partner(request):
             username = request.POST.get("username")
             email = request.POST.get("email")
             phone = request.POST.get("phone")
-            password = request.POST.get("password")
+            password = make_password(request.POST.get("password"))
             all_users = User.objects.all()
             for user in all_users:
                 if email == user.email:
@@ -74,7 +74,8 @@ def create_partner(request):
                 last_name=last_name, username=username, email=email,
                 password=password)
             Partners.objects.create(user=user, phone=phone)
-            return redirect("/")
+            return redirect("login")
         except:
             return HttpResponse("Cannot Create partner")
     return render(request, "partner/create_partner.html")
+
