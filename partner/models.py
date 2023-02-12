@@ -19,15 +19,3 @@ class Partners(TimeStampMixin):
 
     def __str__(self):
         return f"{self.user.first_name}"
-
-
-class PartnerAddress(TimeStampMixin):
-    partner = models.OneToOneField(Partners, on_delete=models.CASCADE)
-    city = models.CharField(max_length=100)
-    country = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"{self.partner.user.first_name, self.city, self.country}"
-
-
-
