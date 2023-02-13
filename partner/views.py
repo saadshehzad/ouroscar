@@ -12,6 +12,7 @@ def create_partner(request):
             username = request.POST.get("username")
             email = request.POST.get("email")
             phone = request.POST.get("phone")
+            address = request.POST.get("address")
             password = make_password(request.POST.get("password"))
             all_users = User.objects.all()
             for user in all_users:
@@ -20,7 +21,7 @@ def create_partner(request):
             user = User.objects.create(first_name=first_name,
                 last_name=last_name, username=username, email=email,
                 password=password)
-            Partners.objects.create(user=user, phone=phone)
+            Partners.objects.create(user=user, phone=phone, address=address)
             return redirect("login")
         except:
             return HttpResponse("Cannot Create partner")
@@ -31,6 +32,7 @@ def partner_profile(request):
     partner = Partners.objects.get(user=request.user)
     context = {
         "name": partner.user.first_name,
-        "email": partner.user.email
+        "email": partner.user.email,
+        "address": partner.address
     }
     return render(request, "partner/partner_profile.html", context)

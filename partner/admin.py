@@ -5,6 +5,6 @@ from .models import Partners
 
 @admin.register(Partners)
 class PartnersAdmin(admin.ModelAdmin):
-    list_display = ("id","created_at", "updated_at", "user")
+    list_display = ("id","created_at", "updated_at", "user", "address")
     list_filter = ("created_at", "updated_at", "user")
     date_hierarchy = "created_at"
