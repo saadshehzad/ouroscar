@@ -12,12 +12,12 @@
     <div class="row justify-content-center">
       <div class="card" style="width: 20rem">
         <div class="card-body">
-          <form method="post" class="text-center" novalidate>
+          <form method="POST" class="text-center" novalidate>
             {% csrf_token %}
         
             {{ form|crispy }}
           
-          <input type="submit" value="Login" class="btn btn-primary full-width">
+            <button type="submit" class="btn btn-danger">Login</button>
           <hr>
           <p class="text-center">Forgot your password <a href="#">Reset Password</a></p>
           <p class="text-center">Don't have a account? <a href="#">Join Now</a></p>

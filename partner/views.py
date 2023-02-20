@@ -32,7 +32,10 @@ def partner_profile(request):
     partner = Partners.objects.get(user=request.user)
     context = {
         "name": partner.user.first_name,
+        "lastname": partner.user.last_name,
+        "username": partner.user.username,
         "email": partner.user.email,
-        "address": partner.address
+        "address": partner.address,
+        "phone": partner.phone,
     }
     return render(request, "partner/partner_profile.html", context)

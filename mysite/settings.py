@@ -6,7 +6,12 @@ SECRET_KEY = "django-insecure-2fw8*$mfzmu3$fc)f#81_=h=o=k*2by_1qls*@b)p@z2gkef5l
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "*",
+    "localhost",
+    "127.0.0.0:8000",
+    "127.0.0.0:8000/",
+]
 
 
 INSTALLED_APPS = [
@@ -95,3 +100,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "profile"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+STATIC_URL = 'static/'
