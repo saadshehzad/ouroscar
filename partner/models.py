@@ -20,3 +20,7 @@ class Partners(TimeStampMixin):
 
     def __str__(self):
         return f"{self.user.first_name}"
+
+
+class CustomUser(TimeStampMixin):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
