@@ -23,7 +23,7 @@ def create_partner(request):
                 last_name=last_name, username=username, email=email,
                 password=password)
             Partners.objects.create(user=user, phone=phone, address=address)
-            return redirect("login")
+            return redirect("partner_login")
         except:
             return HttpResponse("Cannot Create partner")
     return render(request, "partner/create_partner.html")
