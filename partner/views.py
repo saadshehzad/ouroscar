@@ -43,7 +43,7 @@ def partner_login(request):
             else:
                 return HttpResponse("Invalide credentials.")
     context = {"form": form}
-    return render(request, "registration/login.html", context)
+    return render(request, "registration/partner_login.html", context)
     
 
 
@@ -76,9 +76,53 @@ def user_register_view(request):
             user = User.objects.create(first_name=first_name,
                 last_name=last_name, username=username, email=email,
                 password=password)
-            # Partners.objects.create(user=user,) We do not need that while creating normal user
-            return redirect("login")
+            return redirect("user_login")
         except:
             return HttpResponse("Cannot Create partner")
-    return render(request, "partner/create_partner.html")
+    return render(request, "user/user_create.html")
 
+
+
+def user_login(request):
+    form = UserLoginForm()
+    if request.method == "POST":
+        form = UserLoginForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect("/")
+            else:
+                return HttpResponse("Invalide credentials.")
+    context = {"form": form}
+    return render(request, "registration/user_login.html", context)
+
+
+def logout_(request):
+    if not request.user.is_authenticated:
+        return HttpResponse("user already logged out")
+    logout(request)
+    return HttpResponse("Success Logged out")
+    
+        
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import render, redirect
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html', {
+        'form': form
+    })

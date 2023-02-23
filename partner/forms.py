@@ -10,3 +10,7 @@ class CustomUserForm(forms.ModelForm):
 class PartnerLoginForm(forms.Form):
     username = forms.CharField(max_length=100)
     password = forms.CharField(max_length=100, widget=forms.PasswordInput)
+    
+class UserLoginForm(forms.Form):
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(max_length=100, widget=forms.PasswordInput)
