@@ -106,23 +106,24 @@ def logout_(request):
     logout(request)
     return HttpResponse("Success Logged out")
     
-        
-from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
-from django.shortcuts import render, redirect
 
-def change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
+def user_change_password(request):
+    # First we will make sure that user is logged in
+    if not request.user.id: #This line will sure user is logged in
+        return HttpResponse("You need to login first.")
+    
+    if request.method == 'POST': # Then we will make sure the request is POST reuqest
+        form = UserPasswordChange(request.POST)
         if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)
-            return redirect('change_password')
-        else:
-            messages.error(request, 'Please correct the error below.')
+            this_user = User.objects.get(id=request.user.id)
+            old_password = form.cleaned_data["old_password"] #We are getting this from forms
+            new_password = form.cleaned_data["new_password"] #We are getting this from forms
+            if this_user.check_password(old_password): #This will check if previous password is correct 
+                this_user.set_password(new_password) #This will create new password
+                this_user.save() #This is will save the password
+                return HttpResponse("Your password has been changed succesfully.")
+            else:
+                return HttpResponse("Your old password is not correct.")
     else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'registration/change_password.html', {
-        'form': form
-    })
+        form = UserPasswordChange()
+    return render(request, 'registration/change_password.html', {'form': form})
