@@ -18,3 +18,8 @@ class UserLoginForm(forms.Form):
 class UserPasswordChange(forms.Form):
     old_password = forms.CharField(max_length=20, widget=forms.PasswordInput)
     new_password = forms.CharField(max_length=20, widget=forms.PasswordInput)
+
+class PartnerChangePassword(forms.Form):
+    old_password = forms.CharField(max_length=100)
+    new_password = forms.CharField(max_length=100, widget=forms.PasswordInput)
+    

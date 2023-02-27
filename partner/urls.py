@@ -9,6 +9,7 @@ urlpatterns = [
     path("user/create/", user_register_view),
     path("user/login/", user_login, name="user_login"),
     path("logout/", logout_, name="user_logout"),
-    path("password/change", user_change_password, name="user_change_password")
+    path("user/password/change", user_change_password, name="user_change_password"),
+    path("password/change", partner_change_password, name="partner_change_password")
     
 ]
