@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     # Our Apps
     "catalogue",
     "partner",
+    "users",
     "dashboard",
     # Other Apps
     "django_extensions",

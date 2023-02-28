@@ -1,8 +1,7 @@
 from django.contrib import admin
+from .models import Partners
 
-from .models import Partners, CustomUser
 
-admin.site.register(CustomUser)
 
 @admin.register(Partners)
 class PartnersAdmin(admin.ModelAdmin):
