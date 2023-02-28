@@ -5,7 +5,6 @@ from django.core.mail import send_mail
 from .forms import *
 from .models import *
 
-
 def create_partner(request):
     if request.method == "POST":
         try:
@@ -46,6 +45,29 @@ def partner_login(request):
     context = {"form": form}
     return render(request, "registration/partner_login.html", context)
     
+
+
+def partner_change_password(request):
+    if not request.user.id:
+        return HttpResponse("You need to login first")
+    if request.method == "POST":
+        form = PartnerChangePassword(request.POST or None)
+        if form.is_valid():
+            partner_ = User.objects.get(id=request.user.id)
+            old_password = form.cleaned_data["old_password"]
+            new_password = form.cleaned_data["new_password"]
+            if partner_.check_password(old_password):
+                partner_.set_password(new_password)
+                partner_.save()
+                recipient_list = [request.user.email]
+                send_mail("subject", "Your Password has been changed", "ouroscar@point.com",[recipient_list], fail_silently=False)
+                return HttpResponse("Your password has been changed succesfully.")
+            else:
+                return HttpResponse("Your old password is not correct.")
+    else:
+        form = PartnerChangePassword()
+    return render(request, 'registration/partner_change_password.html', {'form': form})
+
 
 
 def partner_profile(request):
@@ -94,6 +116,9 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
+                recipient_list = [request.user.email]
+                send_mail("subject", "You are Logged in", "ouroscar@point.com",[recipient_list], fail_silently=False)
+
                 return HttpResponse("logged in")
             else:
                 return HttpResponse("Invalide credentials.")
@@ -107,23 +132,23 @@ def logout_(request):
     logout(request)
     return HttpResponse("Success Logged out")
     
-# try again
+    
+    
 def user_change_password(request):
-    # First we will make sure that user is logged in
-    if not request.user.id: #This line will sure user is logged in
+    if not request.user.id:
         return HttpResponse("You need to login first.")
     
-    if request.method == 'POST': # Then we will make sure the request is POST reuqest
+    if request.method == 'POST':
         form = UserPasswordChange(request.POST)
         if form.is_valid():
             this_user = User.objects.get(id=request.user.id)
-            old_password = form.cleaned_data["old_password"] #We are getting this from forms
-            new_password = form.cleaned_data["new_password"] #We are getting this from forms
-            if this_user.check_password(old_password): #This will check if previous password is correct 
-                this_user.set_password(new_password) #This will create new password
-                this_user.save()#This is will save the password
-                recipient_list = [request.user.email, ]
-                send_mail("ouroscar@point.com", "Your Password has been changed", recipient_list)
+            old_password = form.cleaned_data["old_password"]
+            new_password = form.cleaned_data["new_password"]
+            if this_user.check_password(old_password):
+                this_user.set_password(new_password)
+                this_user.save()
+                recipient_list = [request.user.email]
+                send_mail("subject", "Your Password has been changed", "ouroscar@point.com",[recipient_list], fail_silently=False)
                 return HttpResponse("Your password has been changed succesfully.")
             else:
                 return HttpResponse("Your old password is not correct.")
@@ -131,25 +156,3 @@ def user_change_password(request):
         form = UserPasswordChange()
     return render(request, 'registration/change_password.html', {'form': form})
 
-
-def partner_change_password(request):
-    if not request.user.id:
-        return HttpResponse("You need to login first")
-    if request.method == "POST":
-        print(".......................")
-        form = PartnerChangePassword(request.POST or None)
-        if form.is_valid():
-            partner_ = User.objects.get(id=request.user.id)
-            old_password = form.cleaned_data["old_password"]
-            new_password = form.cleaned_data["new_password"]
-            if partner_.check_password(old_password):
-                partner_.set_password(new_password)
-                partner_.save()
-                return HttpResponse("Your password has been changed succesfully.")
-            else:
-                return HttpResponse("Your old password is not correct.")
-    else:
-        form = PartnerChangePassword()
-    return render(request, 'registration/partner_change_password.html', {'form': form})
-
-        
