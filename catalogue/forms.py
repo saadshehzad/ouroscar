@@ -3,10 +3,15 @@ from django import forms
 from .models import *
 
 
-class ProductForm(forms.ModelForm):
+class ProductForm(forms.ModelForm):    
     class Meta:
         model = Product
         fields = "__all__"
+        widgets = {'partner': forms.HiddenInput()}
+        
+    def __init__(self, *args, **kwargs):
+        super(ProductForm, self).__init__(*args, **kwargs)
+        self.fields['partner'].required = False
 
 
 class CategoryForm(forms.ModelForm):

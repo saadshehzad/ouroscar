@@ -5,7 +5,7 @@ from .views import *
 
 urlpatterns = [
     # Product urls
-    path("products/list/", product_list),
+    path("products/list/", product_list, name="product_list"),
     path("product/create/", create_product),
     path("product/get/<id>/", get_product),
     path("product/update/<id>/", update_product),

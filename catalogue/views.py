@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-
+from partner.models import Partners
 from .forms import *
 from .models import Category, Product, ProductClass
 
@@ -11,12 +11,16 @@ def product_list(request):
     return render(request, "catalogue/products/product_list.html", context)
 
 
-def create_product(request):
-    product_form = ProductForm(request.POST or None)
-    if product_form.is_valid():
-        product_form.save()
-        return redirect("product_list")
-    context = {"form": product_form}
+def create_product(request):  
+    if request.user.id:
+        product_form = ProductForm(request.POST or None)
+        if product_form.is_valid():
+            product_form.partner = Partners.objects.get(user=request.user)
+            product_form.save()
+            return redirect("product_list")
+        context = {"form": product_form}
+    else:
+        return HttpResponse("You need to login first")
     return render(request, "catalogue/products/create_product.html", context)
 
 

@@ -1,5 +1,5 @@
 from django.db import models
-
+from partner.models import Partners
 
 class TimeStampMixin(models.Model):
     created_at = models.DateTimeField(auto_now=True, null=True)
@@ -29,6 +29,8 @@ class Product(TimeStampMixin):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="products"
     )
+    partner = models.ForeignKey(Partners, on_delete=models.CASCADE,null=True)
+
     name = models.CharField(max_length=40)
     cost = models.CharField(max_length=70)
 
