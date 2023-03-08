@@ -27,6 +27,7 @@ class ProductAdmin(admin.ModelAdmin):
         "created_at",
         "updated_at",
         "category",
+        "partner",
         "name",
         "cost",
     )
