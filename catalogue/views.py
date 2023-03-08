@@ -11,11 +11,10 @@ def product_list(request):
     return render(request, "catalogue/products/product_list.html", context)
 
 
-def create_product(request):  
+def create_product(request):
     if request.user.id:
-        product_form = ProductForm(request.POST or None)
+        product_form = ProductForm(request.POST or None, initial={'partner': Partners.objects.get(user=request.user)})
         if product_form.is_valid():
-            product_form.partner = Partners.objects.get(user=request.user)
             product_form.save()
             return redirect("product_list")
         context = {"form": product_form}
@@ -119,10 +118,10 @@ def productclass_list(request):
 
 
 def create_productclass(request):
-    form = ProductForm(request.POST or None)
+    form = ProductClassForm(request.POST or None)
     if form.is_valid():
         form.save()
-        return redirect("list")
+        return redirect("category_create")
     context = {"form": form}
     return render(request, "catalogue/productclass/create_productclass.html", context)
 
