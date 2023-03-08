@@ -29,7 +29,7 @@ class Product(TimeStampMixin):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="products"
     )
-    partner = models.ForeignKey(Partners, on_delete=models.CASCADE,null=True)
+    partner = models.ForeignKey(Partners, on_delete=models.CASCADE, default=None, related_name="partner_products")
 
     name = models.CharField(max_length=40)
     cost = models.CharField(max_length=70)
