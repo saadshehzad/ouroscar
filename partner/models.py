@@ -11,7 +11,7 @@ class TimeStampMixin(models.Model):
 
 
 class Partners(TimeStampMixin):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="partners")
     phone = models.CharField(max_length=40, null=True)
     address = models.CharField(max_length=40, null=True)
 
